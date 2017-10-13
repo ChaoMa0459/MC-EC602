@@ -16,15 +16,17 @@ import json
 
 import collision_tester
 
-SUPPRESS_OUTPUT = True
+SUPPRESS_OUTPUT = False
 
 
 def check_all_files():
     passed, failed = [], []
 
-    Programs = glob.glob('collisionc*')
+    Programs = glob.glob('cf/collisionc*')
     for file_name in Programs:
-        if "hard" in file_name: continue
+        if "22_hard" in file_name: continue
+        if "24_hard" in file_name: continue
+        if "36_hard" in file_name: continue
 
         loader = unittest.loader.TestLoader()
         results = unittest.result.TestResult()
@@ -44,6 +46,8 @@ def check_all_files():
 
             tests_passed = results.testsRun - len(results.failures) - len(
                 results.errors)
+
+            file_name = file_name.replace('cf/', '')
 
             if results.wasSuccessful():
                 passed.append(file_name)
