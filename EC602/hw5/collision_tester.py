@@ -16,7 +16,8 @@ def runprogram(program, args, inputstr):
         [program, *args],
         input=inputstr.encode(),
         stdout=subprocess.PIPE,
-        stderr=subprocess.PIPE)
+        stderr=subprocess.PIPE,
+        timeout = 0.1)
 
     ret_code = coll_run.returncode
     program_output = coll_run.stdout.decode()
@@ -105,21 +106,21 @@ class CollisionTestCase(unittest.TestCase):
         self.assertEqual(out,correct_out)
         self.assertEqual(errs,"")
 
-    def test_large_input(self):
-        strin = "one 1000000000000 0 1 0\ntwo 2100000000000 0 0 0"
-        correct_out = "1000000\none 1.000001e+12 0 1 0\ntwo 2.1e+12 0 0 0\n"          
-        (rc,out,errs) = runprogram(PROGRAM_TO_TEST,["1000000"],strin)
-        self.assertEqual(rc,0)
-        out = out.replace("1000000.0000", "1000000")
-        self.assertEqual(out,correct_out)
-        self.assertEqual(errs,"")
-
     def test_decimal(self):	
         strin = "A 1.8 3.4 1 0\nB 14.4 2.1 -1 0"
         correct_out = "3\nA 1.5408859 3.827311 -0.9662 0.25779364\nB 14.659114 1.672689 0.9662 -0.25779364\n"      
         (rc,out,errs) = runprogram(PROGRAM_TO_TEST,["3"],strin)
         self.assertEqual(rc,0)
         out = out.replace(".0000", "")
+        self.assertEqual(out,correct_out)
+        self.assertEqual(errs,"")
+
+    def test_large_input(self):
+        strin = "one 1000000000000 0 1 0\ntwo 2100000000000 0 0 0"
+        correct_out = "1000000\none 1.000001e+12 0 1 0\ntwo 2.1e+12 0 0 0\n"          
+        (rc,out,errs) = runprogram(PROGRAM_TO_TEST,["1000000"],strin)
+        self.assertEqual(rc,0)
+        out = out.replace("1000000.0000", "1000000")
         self.assertEqual(out,correct_out)
         self.assertEqual(errs,"")
 

@@ -1,7 +1,4 @@
 {
-    "authors": [
-        "mc163@bu.edu"
-    ],
     "passed": [
         "collisionc_28",
         "collisionc_27",
@@ -32,6 +29,7 @@
         "collisionc_13_hard",
         "collisionc_3",
         "collisionc_31",
+        "collisionc_24_hard",
         "collisionc_25_hard",
         "collisionc_26_hard",
         "collisionc_30_hard",
@@ -48,6 +46,10 @@
         "collisionc_21",
         "collisionc_41",
         "collisionc_4",
-        "collisionc_8"
+        "collisionc_8",
+        "collisionc_22_hard"
+    ],
+    "authors": [
+        "mc163@bu.edu"
     ]
 }
