@@ -1,0 +1,51 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+"""
+# AUTHOR John Keisling jfkeis@bu.edu
+# AUTHOR Sigurdur Egill Thorvaldsson sigurdur@bu.edu
+
+w13_wordbrainsolver
+"""
+"""
+Input example
+{"grid": ["hos", "equ", "era"], "size": 3, "lengths": [3,6]}
+{"grid": ["yeho", "slnl", "onca", "nnab"], "size": 4, "lengths": [5,5,6]}
+{"grid": ["niba", "capt", "haos", "nwmn"], "size": 4, "lengths": [4,5,3,4]}
+{"grid": ["vittm","aposi","nvami","merep","oordb"],"size":5,"lengths":[4,7,7,7]}
+"""
+
+import json
+import numpy as np
+from collections import Counter
+import sys
+
+#list of dictionaries
+all_puzzles = []
+
+def make_puzzles(puz):
+    all_puzzles.append(puz)
+
+
+with open(sys.argv[1], "r") as small_word_list:
+    words = list(small_word_list)
+
+with open(sys.argv[2], "r") as large_word_list:
+    words = list(large_word_list)
+
+puzzles = {}
+while True:
+    inline = input("")
+    try:
+        #makes line a dictionary        
+        puzzline = json.loads(inline)
+        puzzles.update(puzzline)
+        make_puzzles(puzzles)
+        #print(puzzline)
+    except:
+        break
+
+
+# print(all_puzzles[0]['grid'][0][0]) this works down the letter
+#for staf in 
+print(all_puzzles[0]['grid'][1])
+print(['grid'])
